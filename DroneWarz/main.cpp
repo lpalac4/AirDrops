@@ -94,7 +94,7 @@ void run(void){
 		
 		 /** fire bullets **/
 		 if(key[ONE_KEY]){
-			 playerPlane->fireBullets(allProjectiles);
+			allProjectiles.push_back(playerPlane->fireBullets());
 		 }
 
 

@@ -1,6 +1,16 @@
+/** 	
+	@author Luis Palacios 2013
+
+	The plane class is a subclass of an AirborneObject which has the capabilities of adjusting its
+	acceleration and angle of momemtum.  It also is capable of creating new objects including
+	bullets, rockets, cannon shells, and bombs when the ui detects the user pressing the appropriate 
+	keys.
+
+**/
+
 #include "plane.h"
 
-
+/** constructor requires a bitmap thats passed by reference, will call the base class Airborne constructor with that same bitmap reference **/
 Plane::Plane(ALLEGRO_BITMAP& bitmap) : AirborneObject(bitmap)
 {
 	pitch = PITCH_CONSTANT;
@@ -23,7 +33,7 @@ Plane::~Plane(void)
 { 
 	delete this;
 }
-
+/** update all the important attributes of the plane that change with time(t) **/
 void Plane::update(void){
 	/** calculate accelerations **/
 	if(stalling){
@@ -68,13 +78,14 @@ void Plane::adjustPitch(bool pitchUp){
 		pitch = MIN_PITCH;
 
 }
-
+/** Resets the flaps to a 0 degree angle **/
 void Plane::resetPitch(void){
 	pitch = PITCH_CONSTANT;
 }
 
+/** adjust the throttle of the plane first checking its bounds **/
 void Plane::adjustThrottle(int newThrottle){
-	if(newThrottle > 100 || newThrottle < 0){
+	if(newThrottle > 1.0 || newThrottle < 0.0){
 		fprintf(stderr, "throttle is not being bound");
 		return;
 	}
@@ -82,7 +93,7 @@ void Plane::adjustThrottle(int newThrottle){
 	throttle = newThrottle;
 
 }
-
+/** Levels out the angle rotation of the plane's nose over time **/
 void  Plane::stallRoutine(){
 	if(noseRotation > 0.0){
 		noseRotation -= 1.0;
@@ -93,6 +104,7 @@ void  Plane::stallRoutine(){
 
 }
 
+/** checks to make sure the plane doesnt fly faster than it is capable of **/
 void Plane::checkVelocityBarriers(){
 	
 	if(velx > SPEED_BARRIER_X) 
@@ -101,10 +113,10 @@ void Plane::checkVelocityBarriers(){
 		vely = SPEED_BARRIER_Y;
 }
 
-void Plane::fireBullets(std::list<Projectile*>& allProjectiles){
+Projectile* Plane::fireBullets(){
 	Projectile* newBullet = new Projectile((*bulletBitmap));
 	newBullet->setSourceObject(self());
-	allProjectiles.push_back(newBullet);
+	return newBullet;
 }
 
 Plane Plane::self(void){
