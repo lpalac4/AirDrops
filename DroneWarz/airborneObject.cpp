@@ -3,18 +3,21 @@
 
 AirborneObject::AirborneObject(ALLEGRO_BITMAP& bitmap) : GameObject(bitmap)
 {
-	x = SCREEN_W / 2.5 - al_get_bitmap_width(bitmapObject) / 2.0;
-	y = SCREEN_H / 2.5 - al_get_bitmap_height(bitmapObject) / 2.0;
+	TERMINAL_VELY = 5.0;
+	MAX_ALTITUDE = -5000.0;
+	x = 0; //SCREEN_W / 2.5 - al_get_bitmap_width(bitmapObject) / 2.0;
+	y = 0; //SCREEN_H / 2.5 - al_get_bitmap_height(bitmapObject) / 2.0;
 		
 	velx = vely = 0;
 	flying = true;
 	accelx = accely = 0;
+	direction = 0;
 }
 
 
 AirborneObject::~AirborneObject(void)
 {
-	delete this;
+	
 }
 
 void AirborneObject::update(void)
@@ -38,6 +41,10 @@ void AirborneObject::update(void)
 
 	x += (velx + oldvelx)/2;
 	y += (vely + oldvely)/2;
+
+	/** check for maximum altitude **/
+	if(y < MAX_ALTITUDE)
+		y = MAX_ALTITUDE;
 
 }
 

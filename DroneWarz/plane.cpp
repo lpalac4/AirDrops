@@ -14,8 +14,8 @@
 Plane::Plane(ALLEGRO_BITMAP& bitmap) : AirborneObject(bitmap)
 {
 	pitch = PITCH_CONSTANT;
-	SPEED_BARRIER_X = 10.0;
-	SPEED_BARRIER_Y = -10.0;
+	SPEED_BARRIER_X = 5.0;
+	SPEED_BARRIER_Y = -5.0;
 	
 	health = DEFAULT_HEALTH;
 	throttle = DEFAULT_THROTTLE;
@@ -24,14 +24,14 @@ Plane::Plane(ALLEGRO_BITMAP& bitmap) : AirborneObject(bitmap)
 	bombs = DEFAULT_BOMBS;
 	rockets = DEFAULT_ROCKETS;
 	noseRotation = 0.0;
-	engineStrength = 100.0;
+	engineStrength = 2.5;
 	stalling = false;
 }
 
 
 Plane::~Plane(void)
 { 
-	delete this;
+	
 }
 /** update all the important attributes of the plane that change with time(t) **/
 void Plane::update(void){
@@ -41,20 +41,21 @@ void Plane::update(void){
 		AirborneObject::update();
 	}
 	noseRotation += pitch;
-	if(noseRotation >= 45.0)
+	if(noseRotation > 45.0)
 		noseRotation = 45.0;
 	if(noseRotation < -45.0)
 		noseRotation = -45.0;
+	
 	if(pitch == 0.0){
-		if(noseRotation > 0)
-			noseRotation -= 1.0;
+		if(noseRotation > 0.0)
+			noseRotation -= 0.5;
 		else{
-			noseRotation += 1.0;
+			noseRotation += 0.5;
 		}
 	}
 	
-	accelx = (throttle * engineStrength) * cos((noseRotation * PI) / 180.0);
-	accely = -((throttle * engineStrength) * sin((noseRotation * PI) / 180.0)) + GRAVITY;
+	accelx = (throttle * engineStrength) * cos(((noseRotation+9.7) * PI) / 180.0);
+	accely = -((throttle * engineStrength) * sin(((noseRotation+9.7) * PI) / 180.0)) + GRAVITY;
 
 	
 	AirborneObject::update();
@@ -113,9 +114,10 @@ void Plane::checkVelocityBarriers(){
 		vely = SPEED_BARRIER_Y;
 }
 
-Projectile* Plane::fireBullets(){
-	Projectile* newBullet = new Projectile((*bulletBitmap));
+Bullet* Plane::fireBullets(){
+	Bullet* newBullet = new Bullet((*bulletBitmap));
 	newBullet->setSourceObject(self());
+	newBullet->setDirection(noseRotation);
 	return newBullet;
 }
 

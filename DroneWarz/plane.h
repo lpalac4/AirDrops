@@ -14,7 +14,7 @@
 #define PLANE_H
 
 #include "airborneobject.h"
-#include "projectile.h"
+#include "bullet.h"
 #include <stdio.h>
 #include <list>
 
@@ -46,7 +46,7 @@ class Plane :
 public:
 	/** only constructor must pass a bitmap **/
 	Plane(ALLEGRO_BITMAP&);
-	virtual ~Plane(void);
+	~Plane(void);
 	/** getters and setters FINISH LATER**/
 	int getRockets(){ return rockets;}
 	int adjustRockets(int delta){ rockets += delta;}
@@ -66,7 +66,7 @@ public:
 	/** ensure plane velocities are within limits **/
 	virtual void checkVelocityBarriers();
 	/** fireBullets and add them to the list passed by reference **/
-	Projectile* fireBullets();
+	Bullet* fireBullets();
 	
 
 //private:

@@ -11,5 +11,5 @@ GameObject::GameObject(ALLEGRO_BITMAP& bitmap)
 
 GameObject::~GameObject(void)
 {
-	delete this;
+	
 }

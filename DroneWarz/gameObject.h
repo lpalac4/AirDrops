@@ -11,7 +11,7 @@ class GameObject
 public:
 	GameObject(ALLEGRO_BITMAP&);
 	GameObject(void);
-	virtual ~GameObject(void);
+	~GameObject(void);
 
 //protected:
 	ALLEGRO_BITMAP* bitmapObject;

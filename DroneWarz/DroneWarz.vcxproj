@@ -74,13 +74,13 @@
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="plane.cpp" />
-    <ClCompile Include="projectile.cpp" />
+    <ClCompile Include="bullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="airborneObject.h" />
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="plane.h" />
-    <ClInclude Include="projectile.h" />
+    <ClInclude Include="bullet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

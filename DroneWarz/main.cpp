@@ -5,30 +5,34 @@
 #include <allegro5/allegro_ttf.h>
 #include <stdlib.h>
 #include <list>
-#include "projectile.h"
+#include "bullet.h"
 
  
 extern const float FPS = 60;
-extern const int SCREEN_W = 640;
-extern const int SCREEN_H = 480;
+extern const int SCREEN_W = 800;
+extern const int SCREEN_H = 600;
 extern int BOUNCER_SIZE = 32;
 
-float bouncer_x = SCREEN_W / 2.0 - BOUNCER_SIZE / 2.0;
-float bouncer_y = SCREEN_H / 2.0 - BOUNCER_SIZE / 2.0;
+float bouncer_x = SCREEN_W / 6.0 - BOUNCER_SIZE / 6.0;
+float bouncer_y = SCREEN_H / 6.0 - BOUNCER_SIZE / 6.0;
 
 static int CAMERA_X;
 static int CAMERA_Y;
 
 ALLEGRO_BITMAP *bouncer = NULL;
 ALLEGRO_EVENT_QUEUE *event_queue = NULL;
+ALLEGRO_DISPLAY *display = NULL;
+ALLEGRO_TIMER *timer = NULL;
 extern ALLEGRO_BITMAP* bulletBitmap = NULL;
+ALLEGRO_BITMAP* smoketrail = NULL;
 
 ALLEGRO_FONT* font;
 ALLEGRO_FONT* font2;
 
 Plane* playerPlane;
-std::list<Projectile*> allProjectiles;
-std::list<Projectile*>::iterator it;
+std::list<Bullet*> allProjectiles;
+std::list<Bullet*>::iterator it;
+std::list<Bullet::TrailPairs>::iterator it2;
 
 enum MYKEYS {
    KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, SPACEBAR, ONE_KEY, TWO_KEY, THREE_KEY, FOUR_KEY
@@ -38,12 +42,28 @@ void draw(void){
 	/** CENTER THE CAMERA ON THE PLAYERPLANE **/
 	int cameraXOffset = playerPlane->x - SCREEN_W / 2;
 	int cameraYOffset = playerPlane->y - SCREEN_H / 2; 
-	CAMERA_X = playerPlane->x - cameraXOffset;
-	CAMERA_Y = playerPlane->y - cameraYOffset;
-
+	CAMERA_X = (int)(playerPlane->x) - cameraXOffset;
+	CAMERA_Y = (int)(playerPlane->y) - cameraYOffset;
+	/** draw players plane **/
 	al_draw_bitmap(playerPlane->bitmapObject, CAMERA_X , CAMERA_Y, 0);
+	
+	/** now draw projectiles only if theyre within viewport **/
 	for(it = allProjectiles.begin(); it != allProjectiles.end(); ++it){
-		al_draw_bitmap((*it)->bitmapObject, (*it)->x, (*it)->y, 0);
+		int projectileXOffset = (int)((**it).x) - cameraXOffset;
+		int projectileYOffset =	(int)((**it).y) - cameraYOffset;
+		
+		if(projectileXOffset < SCREEN_W && projectileYOffset < SCREEN_H){
+			al_draw_bitmap((**it).bitmapObject, projectileXOffset, projectileYOffset, 0);
+			
+			if((**it).trailShow){
+				for(it2 = (**it).trailQueue.begin(); it2 != (**it).trailQueue.end(); ++it2){
+					int smokeXOffset = (int)((*it2).x) - cameraXOffset;
+					int smokeYOffset = (int)((*it2).y) - cameraYOffset;
+					if(smokeXOffset < SCREEN_W && smokeYOffset < SCREEN_H)
+						al_draw_bitmap(smoketrail, smokeXOffset, smokeYOffset, 0);
+				}
+			}
+		}
 	}
 
 }
@@ -72,7 +92,7 @@ void run(void){
  
          if(key[KEY_LEFT] && playerPlane->x >= 4.0) {
 			 /** increase thrusters **/
-			 float tmpthrottle = playerPlane->throttle - 0.1;
+			 float tmpthrottle = playerPlane->throttle - 0.02;
 			 if(tmpthrottle < 0.0)
 				 playerPlane->throttle = 0.0;
 			 else
@@ -81,7 +101,7 @@ void run(void){
  
          if(key[KEY_RIGHT]) {
 			/** decrease thrusters **/
-			float tmpthrottle = playerPlane->throttle + 0.1;
+			float tmpthrottle = playerPlane->throttle + 0.02;
 			if(tmpthrottle > 1.0)
 				playerPlane->throttle = 1.0;
 			else
@@ -99,6 +119,10 @@ void run(void){
 
 
 		 playerPlane->update();
+		 for(it = allProjectiles.begin(); it != allProjectiles.end(); ++it){
+			 (**it).update();	
+		 }
+
          redraw = true;
       }
       else if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
@@ -156,7 +180,7 @@ void run(void){
 			   break;
 			
 			case ALLEGRO_KEY_1:
-			   key[ONE_KEY] = true;
+			   key[ONE_KEY] = false;
 			   break;
          }
 		 playerPlane->resetPitch();
@@ -171,7 +195,9 @@ void run(void){
          draw();
 		 al_draw_textf(font, al_map_rgb(255,255,255), 640/2, (480/4), ALLEGRO_ALIGN_CENTRE, "planeX : %f planeY: %f planeRotation: %f planePitch: %f", playerPlane->x, playerPlane->y,  playerPlane->noseRotation,  playerPlane->pitch);
 		 al_draw_textf(font2, al_map_rgb(255,255,255), 640/2, (480-(480/4)), ALLEGRO_ALIGN_CENTRE, "throttle : %f flyingBool: %i accelX = %f accelY: %f ", playerPlane->throttle, playerPlane->flying, playerPlane->accelx, playerPlane->accely);
-         al_flip_display();
+         
+		 al_flip_display();
+
       }
    }
 
@@ -179,8 +205,7 @@ void run(void){
  
 int main(int argc, char **argv)
 {
-   ALLEGRO_DISPLAY *display = NULL;
-   ALLEGRO_TIMER *timer = NULL;
+
      
    if(!al_init()) {
       fprintf(stderr, "failed to initialize allegro!\n");
@@ -226,10 +251,22 @@ int main(int argc, char **argv)
       return -1;
    }
 
-   al_set_target_bitmap(bulletBitmap);
+   smoketrail = al_create_bitmap(BOUNCER_SIZE/6, BOUNCER_SIZE/6);
+   if(!smoketrail) {
+      fprintf(stderr, "failed to create bouncer bitmap!\n");
+      al_destroy_display(display);
+      al_destroy_timer(timer);
+      return -1;
+   }
+
    al_set_target_bitmap(bouncer);
    al_clear_to_color(al_map_rgb(255, 0, 255));
+   al_set_target_bitmap(bulletBitmap);
+   al_clear_to_color(al_map_rgb(0, 255, 0));
+   al_set_target_bitmap(smoketrail);
+   al_clear_to_color(al_map_rgb(150,150,150));
    al_set_target_bitmap(al_get_backbuffer(display));
+
  
    event_queue = al_create_event_queue();
    if(!event_queue) {

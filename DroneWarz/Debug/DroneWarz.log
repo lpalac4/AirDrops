@@ -1,17 +1,23 @@
-﻿Build started 10/31/2013 1:31:33 AM.
+﻿Build started 10/31/2013 11:42:17 PM.
      1>Project "D:\Documents\visualStudioWorkspace\DroneWarz\DroneWarz\DroneWarz.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Programs\x86\VC\bin\CL.exe /c /Ic:\allegro\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         D:\Programs\x86\VC\bin\CL.exe /c /Ic:\allegro\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt airborneObject.cpp bullet.cpp main.cpp plane.cpp
+         airborneObject.cpp
+         Generating Code...
+         Compiling...
+         plane.cpp
          main.cpp
+         bullet.cpp
+         Generating Code...
        Link:
          D:\Programs\x86\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documents\visualStudioWorkspace\DroneWarz\Debug\DroneWarz.exe" /INCREMENTAL /NOLOGO /LIBPATH:c:\allegro\lib "allegro-5.0.10-monolith-md-debug.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Documents\visualStudioWorkspace\DroneWarz\Debug\DroneWarz.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documents\visualStudioWorkspace\DroneWarz\Debug\DroneWarz.lib" /MACHINE:X86 Debug\airborneObject.obj
          Debug\gameObject.obj
          Debug\main.obj
          Debug\plane.obj
-         Debug\projectile.obj
+         Debug\bullet.obj
          DroneWarz.vcxproj -> D:\Documents\visualStudioWorkspace\DroneWarz\Debug\DroneWarz.exe
      1>Done Building Project "D:\Documents\visualStudioWorkspace\DroneWarz\DroneWarz\DroneWarz.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.25
+Time Elapsed 00:00:03.62
