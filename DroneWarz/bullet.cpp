@@ -3,14 +3,15 @@
 
 Bullet::Bullet(ALLEGRO_BITMAP& bitmap) : AirborneObject(bitmap)
 {
-	engineStrength = 280.0;
-	SPEED_BARRIER_X = 280.0;
-	SPEED_BARRIER_Y = -280.0;
+	engineStrength = 200.00;
+	SPEED_BARRIER_X = 100;
+	SPEED_BARRIER_Y = -100;
 	direction = 0.0;
-	velx = engineStrength;
-	vely = GRAVITY;
+	velx = 0;
+	vely = 0;
 	trailShow = false;
-	TERMINAL_VELY = 280;
+	TERMINAL_VELY = 100.0;
+	trailList = NULL;
 }
 
 void Bullet::setSourceObject(AirborneObject& origin){
@@ -27,21 +28,7 @@ void Bullet::setDirection(float dir){
 
 Bullet::~Bullet(void)
 {
-	delete[] &trailQueue;
-}
-
-void Bullet::addTrailMarker(){
-	TrailPairs* newPair = new TrailPairs;
-	newPair->x = x;
-	newPair->y = y;
-
-	trailQueue.push_back(*newPair);
-
-	if(trailQueue.size() > 8){
-		TrailPairs* tmpPtr = &(trailQueue.front());
-		trailQueue.pop_front();
-		delete tmpPtr;
-	}
+	
 }
 
 void Bullet::update(void){
@@ -54,9 +41,9 @@ void Bullet::update(void){
 
 	accelx = (engineStrength * cos((direction * PI) / 180.0));
 	accely = -(engineStrength * sin((direction * PI) / 180.0)) + GRAVITY;
-	if(trailShow){
+	/*if(trailShow){
 		addTrailMarker();
-	}
+	}*/
 	
 	AirborneObject::update();	
 

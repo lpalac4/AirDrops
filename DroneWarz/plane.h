@@ -15,7 +15,10 @@
 
 #include "airborneobject.h"
 #include "bullet.h"
+#include "rocket.h"
+#include "bomb.h"
 #include <stdio.h>
+#include <vector>
 #include <list>
 
 /** boundaries for the pitch of the plane **/
@@ -38,6 +41,9 @@ const int DEFAULT_BOMBS = 0;
 const int DEFAULT_HEALTH = 100;
 /** bullet Bitmap is declared and defined elsewhere in the project **/
 extern ALLEGRO_BITMAP* bulletBitmap;
+extern ALLEGRO_BITMAP* bombBitmap;
+extern ALLEGRO_BITMAP* rocketBitmap;
+
 
 
 class Plane :
@@ -67,6 +73,8 @@ public:
 	virtual void checkVelocityBarriers();
 	/** fireBullets and add them to the list passed by reference **/
 	Bullet* fireBullets();
+	Rocket* fireRockets();
+	Bomb* dropBombs();
 	
 
 //private:
@@ -81,10 +89,12 @@ public:
 	int rockets;
 	float noseRotation;
 	float engineStrength;
+	bool showTrail;
+	std::vector<std::pair<float,float>>* trailList;
 
 	private:
 	Plane self(void);
-
+	
 
 
 };

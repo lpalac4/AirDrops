@@ -70,17 +70,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AiGround.cpp" />
+    <ClCompile Include="AiPilot.cpp" />
     <ClCompile Include="airborneObject.cpp" />
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="Rocket.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AiGround.h" />
+    <ClInclude Include="AiPilot.h" />
     <ClInclude Include="airborneObject.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="plane.h" />
     <ClInclude Include="bullet.h" />
+    <ClInclude Include="Rocket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

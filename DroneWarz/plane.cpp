@@ -14,8 +14,8 @@
 Plane::Plane(ALLEGRO_BITMAP& bitmap) : AirborneObject(bitmap)
 {
 	pitch = PITCH_CONSTANT;
-	SPEED_BARRIER_X = 5.0;
-	SPEED_BARRIER_Y = -5.0;
+	SPEED_BARRIER_X = 2.0;
+	SPEED_BARRIER_Y = -2.0;
 	
 	health = DEFAULT_HEALTH;
 	throttle = DEFAULT_THROTTLE;
@@ -26,12 +26,15 @@ Plane::Plane(ALLEGRO_BITMAP& bitmap) : AirborneObject(bitmap)
 	noseRotation = 0.0;
 	engineStrength = 2.5;
 	stalling = false;
+	showTrail = true;
+	trailList = new std::vector<std::pair<float, float>>;
+	
 }
 
 
 Plane::~Plane(void)
 { 
-	
+	//delete trailList;
 }
 /** update all the important attributes of the plane that change with time(t) **/
 void Plane::update(void){
@@ -54,8 +57,8 @@ void Plane::update(void){
 		}
 	}
 	
-	accelx = (throttle * engineStrength) * cos(((noseRotation+9.7) * PI) / 180.0);
-	accely = -((throttle * engineStrength) * sin(((noseRotation+9.7) * PI) / 180.0)) + GRAVITY;
+	accelx = (throttle * engineStrength) * cos(((noseRotation) * PI) / 180.0);
+	accely = -((throttle * engineStrength) * sin(((noseRotation + 10.80) * PI) / 180.0)) + GRAVITY;
 
 	
 	AirborneObject::update();
@@ -63,6 +66,17 @@ void Plane::update(void){
 		//stalling = true;
 		//stallRoutine();
 	//}
+
+	if(showTrail){
+		std::pair<float, float>* trail = new std::pair<float, float>();
+		trail->first = x;
+		trail->second = y;
+
+		if(trailList && trailList->size() > 8){
+			trailList->erase(trailList->begin());
+		}
+		trailList->push_back(*trail);
+	}
 }
 
 /**	adjusting pitch given 0,0 is on the top left corner of viewport **/
@@ -119,6 +133,20 @@ Bullet* Plane::fireBullets(){
 	newBullet->setSourceObject(self());
 	newBullet->setDirection(noseRotation);
 	return newBullet;
+}
+
+Rocket* Plane::fireRockets(){
+	Rocket* newRocket = new Rocket(*rocketBitmap);
+	newRocket->setSourceObject(self());
+	newRocket->setDirection(noseRotation);
+	return newRocket;
+}
+
+Bomb* Plane::dropBombs(){
+	Bomb* newBomb = new Bomb(*bombBitmap);
+	newBomb->setSourceObject(self());
+	newBomb->setDirection(270);
+	return newBomb;
 }
 
 Plane Plane::self(void){

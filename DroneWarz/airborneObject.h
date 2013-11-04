@@ -14,7 +14,8 @@ class AirborneObject :
 	public GameObject
 {
 public:
-	AirborneObject(ALLEGRO_BITMAP& );
+	AirborneObject(ALLEGRO_BITMAP&);
+	AirborneObject();
 	~AirborneObject(void);
 	void update(void);
 	virtual void checkVelocityBarriers();
@@ -30,6 +31,7 @@ public:
 	float direction;
 	float TERMINAL_VELY;
 	float MAX_ALTITUDE;
+	bool isAi;
 	
 };
 
