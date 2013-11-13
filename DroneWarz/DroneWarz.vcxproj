@@ -78,6 +78,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="Reload.cpp" />
     <ClCompile Include="Rocket.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +89,7 @@
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="plane.h" />
     <ClInclude Include="bullet.h" />
+    <ClInclude Include="Reload.h" />
     <ClInclude Include="Rocket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

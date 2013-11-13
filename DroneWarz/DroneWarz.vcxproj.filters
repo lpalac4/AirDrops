@@ -42,6 +42,9 @@
     <ClCompile Include="AiGround.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Reload.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameObject.h">
@@ -66,6 +69,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AiGround.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Reload.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,10 +6,11 @@
 #include <stdlib.h>
 #include <list>
 #include "plane.h"
+#include "Reload.h"
 #include "bullet.h"
 #include "rocket.h"
 #include "bomb.h"
-#include "AiGround.h"
+//#include "AiGround.h"
 #include "AiPilot.h"
 
  
@@ -42,15 +43,15 @@ extern ALLEGRO_BITMAP* rocketBitmap = NULL;
 extern ALLEGRO_BITMAP* bombBitmap = NULL;
 ALLEGRO_BITMAP* smoketrail = NULL;
 
-ALLEGRO_FONT* font;
-ALLEGRO_FONT* font2;
+ALLEGRO_FONT* font = NULL;
+ALLEGRO_FONT* font2 = NULL;
 
 extern Plane* playerPlane = NULL;
 
 std::list<Bullet*> allProjectiles;
 std::list<Bullet*>::iterator it;
-std::vector<std::pair<float,float>>::iterator it2;
-std::vector<AiGround*> groundAi;
+std::vector<std::pair<float,float>>::iterator it2 ;
+//std::vector<AiGround*> groundAi;
 std::vector<AiPilot*> airAi;
 
 int mapOriginX = 0;
@@ -93,9 +94,13 @@ void draw(void){
 	}
 
 	/** now draw ai players **/
-	for(unsigned int i = 0; i < groundAi.size(); i++){
-		//
-	}
+	/*for(unsigned int i = 0; i < groundAi.size(); i++){
+		if((groundAi.at(i)->getX() > playerPlane->x - SCREEN_W/2) && (groundAi.at(i)->getY() < playerPlane->y + SCREEN_W/2)){
+			int AIScreenCoordX = groundAi.at(i)->getX() - cameraXOffset;
+			int AIScreenCoordY = groundAi.at(i)->getY() - cameraYOffset;
+			al_draw_bitmap(airAi.at(i)->bitmapObject, AIScreenCoordX, AIScreenCoordY, 0);
+		}
+	}*/
 
 	for(unsigned int i = 0; i < airAi.size(); i++){
 		if((airAi.at(i)->x > playerPlane->x - SCREEN_W/2) && (airAi.at(i)->y < playerPlane->y + SCREEN_W/2)){ 
@@ -129,9 +134,9 @@ void draw(void){
 	Process updates to ai objects
 **/
 void processAI(void){
-	for(unsigned int i = 0; i < groundAi.size(); i++){
-		groundAi.at(i)->processUpdate();
-	}
+	//for(unsigned int i = 0; i < groundAi.size(); i++){
+	//	//groundAi.at(i)->processUpdate();
+	//}
 
 	for(unsigned int i = 0; i < airAi.size(); i++){
 		airAi.at(i)->processUpdate();
@@ -145,9 +150,9 @@ void processAI(void){
 void initializeAI(int groundNumOnScreen, int airNumOnScreen){
 	
 	/** initialize number of ground enemies on screen at once **/
-	for(int i = 0; i < groundNumOnScreen; i++){
-		groundAi.push_back(new AiGround(*bouncer));	
-	}
+	//for(int i = 0; i < groundNumOnScreen; i++){
+	//	//groundAi.push_back(new AiGround(*bouncer));	
+	//}
 
 	/** initialize number of air enemies on screen at one time **/
 	for(int i = 0; i < airNumOnScreen; i++){
@@ -167,6 +172,7 @@ void run(void){
    {
       ALLEGRO_EVENT ev;
       al_wait_for_event(event_queue, &ev);
+
  
       if(ev.type == ALLEGRO_EVENT_TIMER) {
 		if(key[KEY_UP]) {
@@ -218,12 +224,20 @@ void run(void){
 			allProjectiles.push_back(playerPlane->dropBombs());
 		 }
 
-		 /** update data structures **/
-		 playerPlane->update();
-		 for(it = allProjectiles.begin(); it != allProjectiles.end(); ++it){
-			 (**it).update();	
-		 }
-		 processAI();
+	  /** update data structures **/
+	  playerPlane->update();
+	  for(it = allProjectiles.begin(); it != allProjectiles.end(); ++it){
+		(**it).update();	
+	  }
+	  processAI();
+	  /*for(int i = 0; i < groundAi.size(); i++){
+		  if(groundAi.at(i)->getReload()->checkIfReady()){
+			  Bullet* newBullet = groundAi.at(i)->firedShots();
+			  newBullet->setSourceObject(*groundAi.at(i));
+			  allProjectiles.push_back(newBullet);
+		  }
+	  }*/
+
 
          redraw = true;
       }

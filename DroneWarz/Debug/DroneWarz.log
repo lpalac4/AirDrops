@@ -1,8 +1,8 @@
-﻿Build started 11/4/2013 2:34:09 AM.
+﻿Build started 11/13/2013 12:11:29 AM.
      1>Project "D:\Documents\visualStudioWorkspace\DroneWarz\DroneWarz\DroneWarz.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Programs\x86\VC\bin\CL.exe /c /Ic:\allegro\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt AiPilot.cpp
-         AiPilot.cpp
+         D:\Programs\x86\VC\bin\CL.exe /c /Ic:\allegro\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
        Link:
          D:\Programs\x86\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documents\visualStudioWorkspace\DroneWarz\Debug\DroneWarz.exe" /INCREMENTAL /NOLOGO /LIBPATH:c:\allegro\lib "allegro-5.0.10-monolith-md-debug.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Documents\visualStudioWorkspace\DroneWarz\Debug\DroneWarz.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documents\visualStudioWorkspace\DroneWarz\Debug\DroneWarz.lib" /MACHINE:X86 Debug\AiGround.obj
          Debug\AiPilot.obj
@@ -12,10 +12,11 @@
          Debug\main.obj
          Debug\plane.obj
          Debug\bullet.obj
+         Debug\Reload.obj
          Debug\Rocket.obj
          DroneWarz.vcxproj -> D:\Documents\visualStudioWorkspace\DroneWarz\Debug\DroneWarz.exe
      1>Done Building Project "D:\Documents\visualStudioWorkspace\DroneWarz\DroneWarz\DroneWarz.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.35
+Time Elapsed 00:00:01.55
