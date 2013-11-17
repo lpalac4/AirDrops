@@ -19,6 +19,8 @@ extern const int SCREEN_W = 640;
 extern const int SCREEN_H = 480;
 
 extern const int WORLD_W = 10000;
+
+
 extern const int WORLD_H = 480;
 
 extern int BOUNCER_SIZE = 32;
