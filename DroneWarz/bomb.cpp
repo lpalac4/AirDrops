@@ -35,7 +35,7 @@ void Bomb::update(void){
 	accelx = (engineStrength * cos((direction * PI) / 180.0));
 	accely = -(engineStrength * sin((direction * PI) / 180.0)) + GRAVITY;
 	AirborneObject::update();	
-	if(!flying){
+	if(grounded){
 	/** hit the ground explode **/
 		explode = true;
 	}

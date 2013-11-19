@@ -20,11 +20,9 @@ public:
 	void update(void);
 	virtual void checkVelocityBarriers();
 
-//protected:
 	float x;
 	float y;
 	float velx, vely;
-	bool flying;
 	float accelx, accely;
 	float SPEED_BARRIER_X;
 	float SPEED_BARRIER_Y;
@@ -32,6 +30,10 @@ public:
 	float TERMINAL_VELY;
 	float MAX_ALTITUDE;
 	bool isAi;
+	void setIsGrounded(bool);
+	bool getIsGrounded(void);
+
+protected: bool grounded;
 	
 };
 

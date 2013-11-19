@@ -9,7 +9,7 @@ AirborneObject::AirborneObject(ALLEGRO_BITMAP& bitmap) : GameObject(bitmap)
 	y = -300; //SCREEN_H / 2.5 - al_get_bitmap_height(bitmapObject) / 2.0;
 		
 	velx = vely = 0;
-	flying = true;
+	grounded = false;
 	accelx = accely = 0;
 	direction = 0;
 	isAi = false;
@@ -30,12 +30,18 @@ void AirborneObject::update(void)
 	float oldvely = vely;
 
 	if(y > (0))
-		flying = false;
+		grounded = true;
 	
 	velx += accelx;
 	vely += accely;
 	
-	if(!flying) vely = velx = 0;
+	if(grounded){
+		y = 0;
+		accelx = 0;
+		accely = 0;
+		vely = 0;
+		velx = 0;
+	}
 	
 	/** check to make sure object is flying faster than the speed of light lol **/
 	checkVelocityBarriers();
@@ -56,4 +62,11 @@ void AirborneObject::checkVelocityBarriers(){
 	/** handled by subclass **/
 }
 
+void AirborneObject::setIsGrounded(bool isGround){
+	grounded = isGround;
+}
+
+bool AirborneObject::getIsGrounded(){
+	return grounded;
+}
 

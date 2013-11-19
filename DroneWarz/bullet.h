@@ -2,11 +2,8 @@
 #define BULLET_H
 
 #include "airborneObject.h"
-//#include "AiGround.h"
 #include <vector>
 #include <utility>
-
-
 
 class Bullet :
 	public AirborneObject
@@ -18,7 +15,6 @@ public:
 	virtual void update(void);
 	virtual void checkVelocityBarriers();
 	void setSourceObject(AirborneObject&);
-//	void setSourceObject(AiGround&);
 	void setDirection(float);
 	
 //protected:

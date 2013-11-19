@@ -39,10 +39,10 @@
     <ClCompile Include="AiPilot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AiGround.cpp">
+    <ClCompile Include="Reload.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Reload.cpp">
+    <ClCompile Include="TankShell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,10 +68,10 @@
     <ClInclude Include="AiPilot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AiGround.h">
+    <ClInclude Include="Reload.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Reload.h">
+    <ClInclude Include="TankShell.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

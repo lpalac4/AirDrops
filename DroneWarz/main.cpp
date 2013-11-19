@@ -10,9 +10,8 @@
 #include "bullet.h"
 #include "rocket.h"
 #include "bomb.h"
-//#include "AiGround.h"
 #include "AiPilot.h"
-
+//#include "TankShell.h"
  
 extern const float FPS = 60;
 extern const int SCREEN_W = 640;
@@ -51,9 +50,10 @@ ALLEGRO_FONT* font2 = NULL;
 extern Plane* playerPlane = NULL;
 
 std::list<Bullet*> allProjectiles;
+//std::list<TankShell*> allGroundProjectiles;
 std::list<Bullet*>::iterator it;
+std::list<Bullet*>::iterator itrGround;
 std::vector<std::pair<float,float>>::iterator it2 ;
-//std::vector<AiGround*> groundAi;
 std::vector<AiPilot*> airAi;
 
 int mapOriginX = 0;
@@ -96,16 +96,16 @@ void draw(void){
 	}
 
 	/** now draw ai players **/
-	/*for(unsigned int i = 0; i < groundAi.size(); i++){
-		if((groundAi.at(i)->getX() > playerPlane->x - SCREEN_W/2) && (groundAi.at(i)->getY() < playerPlane->y + SCREEN_W/2)){
-			int AIScreenCoordX = groundAi.at(i)->getX() - cameraXOffset;
-			int AIScreenCoordY = groundAi.at(i)->getY() - cameraYOffset;
-			al_draw_bitmap(airAi.at(i)->bitmapObject, AIScreenCoordX, AIScreenCoordY, 0);
-		}
-	}*/
+	//for(unsigned int i = 0; i < groundAi.size(); i++){
+	//	if((groundAi.at(i)->getX() > playerPlane->x - SCREEN_W/2) && (groundAi.at(i)->getY() < playerPlane->y + SCREEN_W/2)){
+	//		int AIScreenCoordX = groundAi.at(i)->getX() - cameraXOffset;
+	//		int AIScreenCoordY = groundAi.at(i)->getY() - cameraYOffset;
+	//		al_draw_bitmap(airAi.at(i)->bitmapObject, AIScreenCoordX, AIScreenCoordY, 0);
+	//	}
+	//}
 
 	for(unsigned int i = 0; i < airAi.size(); i++){
-		if((airAi.at(i)->x > playerPlane->x - SCREEN_W/2) && (airAi.at(i)->y < playerPlane->y + SCREEN_W/2)){ 
+		if((airAi.at(i)->x > playerPlane->x - SCREEN_W/2) && (airAi.at(i)->y < playerPlane->y + SCREEN_H/2)){ 
 			int AIScreenCoordX = airAi.at(i)->x - cameraXOffset;
 			int AIScreenCoordY = airAi.at(i)->y - cameraYOffset;
 			al_draw_bitmap(airAi.at(i)->bitmapObject, AIScreenCoordX, AIScreenCoordY, 0);
@@ -137,7 +137,7 @@ void draw(void){
 **/
 void processAI(void){
 	//for(unsigned int i = 0; i < groundAi.size(); i++){
-	//	//groundAi.at(i)->processUpdate();
+	//	groundAi.at(i)->processUpdate();
 	//}
 
 	for(unsigned int i = 0; i < airAi.size(); i++){
@@ -152,9 +152,11 @@ void processAI(void){
 void initializeAI(int groundNumOnScreen, int airNumOnScreen){
 	
 	/** initialize number of ground enemies on screen at once **/
-	//for(int i = 0; i < groundNumOnScreen; i++){
-	//	//groundAi.push_back(new AiGround(*bouncer));	
-	//}
+	for(int i = 0; i < groundNumOnScreen; i++){
+		AiPilot* groundAi = new AiPilot(*bouncer);
+		groundAi->setIsGrounded(true);
+		airAi.push_back(groundAi);	
+	}
 
 	/** initialize number of air enemies on screen at one time **/
 	for(int i = 0; i < airNumOnScreen; i++){
@@ -205,7 +207,7 @@ void run(void){
 				playerPlane->throttle = tmpthrottle;
          }
 		 if(key[SPACEBAR]){
-			if(!playerPlane->flying)
+			 if(!playerPlane->getIsGrounded())
 				playerPlane->vely = 15.0;
 		 }
 		
@@ -232,13 +234,13 @@ void run(void){
 		(**it).update();	
 	  }
 	  processAI();
-	  /*for(int i = 0; i < groundAi.size(); i++){
-		  if(groundAi.at(i)->getReload()->checkIfReady()){
-			  Bullet* newBullet = groundAi.at(i)->firedShots();
-			  newBullet->setSourceObject(*groundAi.at(i));
-			  allProjectiles.push_back(newBullet);
-		  }
-	  }*/
+	  //for(int i = 0; i < groundAi.size(); i++){
+		 // if(groundAi.at(i)->getReload()->checkIfReady()){
+			//  TankShell* newBullet = groundAi.at(i)->firedShots();
+			//  newBullet->setSourceObject(*(groundAi.at(i)));
+			//  allGroundProjectiles.push_back(newBullet);
+		 // }
+	  //}
 
 
          redraw = true;
@@ -331,7 +333,7 @@ void run(void){
 		
          draw();
 		 al_draw_textf(font, al_map_rgb(255,255,255), 640/2, (480/4), ALLEGRO_ALIGN_CENTRE, "planeX : %f planeY: %f planeRotation: %f planePitch: %f", playerPlane->x, playerPlane->y,  playerPlane->noseRotation,  playerPlane->pitch);
-		 al_draw_textf(font2, al_map_rgb(255,255,255), 640/2, (480-(480/4)), ALLEGRO_ALIGN_CENTRE, "throttle : %f flyingBool: %i accelX = %f accelY: %f", playerPlane->throttle, playerPlane->flying, playerPlane->accelx, playerPlane->accely);
+		 al_draw_textf(font2, al_map_rgb(255,255,255), 640/2, (480-(480/4)), ALLEGRO_ALIGN_CENTRE, "throttle : %f flyingBool: %i accelX = %f accelY: %f", playerPlane->throttle, playerPlane->getIsGrounded(), playerPlane->accelx, playerPlane->accely);
          
 		 al_flip_display();
 
@@ -476,7 +478,7 @@ int main(int argc, char **argv)
    al_start_timer(timer);
  
    playerPlane = new Plane(*bouncer);
-   initializeAI(0,1);
+   initializeAI(1,1);
    run();
    
    delete playerPlane;

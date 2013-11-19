@@ -70,7 +70,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AiGround.cpp" />
     <ClCompile Include="AiPilot.cpp" />
     <ClCompile Include="airborneObject.cpp" />
     <ClCompile Include="Bomb.cpp" />
@@ -80,9 +79,9 @@
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="Reload.cpp" />
     <ClCompile Include="Rocket.cpp" />
+    <ClCompile Include="TankShell.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AiGround.h" />
     <ClInclude Include="AiPilot.h" />
     <ClInclude Include="airborneObject.h" />
     <ClInclude Include="Bomb.h" />
@@ -91,6 +90,7 @@
     <ClInclude Include="bullet.h" />
     <ClInclude Include="Reload.h" />
     <ClInclude Include="Rocket.h" />
+    <ClInclude Include="TankShell.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

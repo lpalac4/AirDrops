@@ -21,12 +21,6 @@ void Bullet::setSourceObject(AirborneObject& origin){
 
 }
 
-//void Bullet::setSourceObject(AiGround& origin){
-//	sourceOfProjectile = origin;
-//	x = origin.getX() + (al_get_bitmap_width(origin.bitmapObject)/2);
-//	y = origin.getY() + (al_get_bitmap_height(origin.bitmapObject)/2);
-//}
-
 void Bullet::setDirection(float dir){
 	direction = dir;
 }

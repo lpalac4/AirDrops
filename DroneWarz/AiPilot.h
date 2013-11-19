@@ -3,9 +3,12 @@
 
 
 #include "plane.h"
+#include "Reload.h"
+#include <math.h>
 
 extern float RADIAN_TO_ANGLE;
 extern Plane* playerPlane;
+static float FIRE_RANGE = SCREEN_W >> 1;
 
 class AiPilot :
 	public Plane
@@ -13,10 +16,13 @@ class AiPilot :
 public:
 	AiPilot(ALLEGRO_BITMAP&);
 	~AiPilot(void);
-	void processUpdate();
+	void processUpdate(void);
 	virtual void checkVelocityBarriers();
-	
-private:
+	Reload* getReload(void);
+	Reload* reload;
+	bool inFireRange;
+
+//private:
 
 	int fireKey;
 	void chooseDirection(void);
