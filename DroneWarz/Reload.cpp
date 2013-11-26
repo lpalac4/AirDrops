@@ -1,6 +1,5 @@
 #include "Reload.h"
 
-
 Reload::Reload(void)
 {
 	lastFired;
@@ -9,9 +8,15 @@ Reload::Reload(void)
 	readyToFire = true;
 };
 
+Reload::Reload(unsigned int duration){
+	reloadTime = duration;
+	readyToFire = true;
+
+}
 
 Reload::~Reload(void)
 {
+
 }
 
 bool Reload::checkIfReady(void){

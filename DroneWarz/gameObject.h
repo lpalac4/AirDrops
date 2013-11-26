@@ -5,6 +5,7 @@
 
 extern const int SCREEN_W;
 extern const int SCREEN_H;
+extern ALLEGRO_BITMAP* explosion;
 
 class GameObject
 {

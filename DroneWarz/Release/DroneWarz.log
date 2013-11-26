@@ -1,0 +1,25 @@
+﻿Build started 11/25/2013 1:07:02 AM.
+     1>Project "C:\Users\Luis\documents\GitHub\DroneWars1.0\DroneWarz\DroneWarz.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Ic:\allegro\include /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BoundaryBox.cpp ProjectileObject.cpp
+         BoundaryBox.cpp
+         ProjectileObject.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Luis\documents\GitHub\DroneWars1.0\Release\DroneWarz.exe" /NOLOGO /LIBPATH:c:\allegro\lib "allegro-5.0.10-monolith-md.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Luis\documents\GitHub\DroneWars1.0\Release\DroneWarz.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Luis\documents\GitHub\DroneWars1.0\Release\DroneWarz.lib" /MACHINE:X86 /SAFESEH Release\Ai.obj
+         Release\BoundaryBox.obj
+         Release\CharacterObject.obj
+         Release\AOEProjectile.obj
+         Release\GameObject.obj
+         Release\main.obj
+         Release\PlayerObject.obj
+         Release\ProjectileObject.obj
+         Release\Reload.obj
+         Release\SpecialAttackObject.obj
+         Generating code
+         Finished generating code
+         DroneWarz.vcxproj -> C:\Users\Luis\documents\GitHub\DroneWars1.0\Release\DroneWarz.exe
+     1>Done Building Project "C:\Users\Luis\documents\GitHub\DroneWars1.0\DroneWarz\DroneWarz.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.06

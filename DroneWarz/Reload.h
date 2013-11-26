@@ -8,6 +8,7 @@ class Reload
 {
 public:
 	Reload(void);
+	Reload(unsigned int);
 	~Reload(void);
 	
 	void firedShot(void);

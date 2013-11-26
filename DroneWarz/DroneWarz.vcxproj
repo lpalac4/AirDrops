@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -18,13 +18,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -70,27 +70,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AiPilot.cpp" />
-    <ClCompile Include="airborneObject.cpp" />
-    <ClCompile Include="Bomb.cpp" />
-    <ClCompile Include="gameObject.cpp" />
+    <ClCompile Include="Ai.cpp" />
+    <ClCompile Include="BoundaryBox.cpp" />
+    <ClCompile Include="CharacterObject.cpp" />
+    <ClCompile Include="AOEProjectile.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="plane.cpp" />
-    <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="PlayerObject.cpp" />
+    <ClCompile Include="ProjectileObject.cpp" />
     <ClCompile Include="Reload.cpp" />
-    <ClCompile Include="Rocket.cpp" />
-    <ClCompile Include="TankShell.cpp" />
+    <ClCompile Include="SpecialAttackObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AiPilot.h" />
-    <ClInclude Include="airborneObject.h" />
-    <ClInclude Include="Bomb.h" />
-    <ClInclude Include="gameObject.h" />
-    <ClInclude Include="plane.h" />
-    <ClInclude Include="bullet.h" />
+    <ClInclude Include="Ai.h" />
+    <ClInclude Include="BoundaryBox.h" />
+    <ClInclude Include="CharacterObject.h" />
+    <ClInclude Include="AOEProjectile.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="PlayerObject.h" />
+    <ClInclude Include="ProjectileObject.h" />
     <ClInclude Include="Reload.h" />
-    <ClInclude Include="Rocket.h" />
-    <ClInclude Include="TankShell.h" />
+    <ClInclude Include="SpecialAttackObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
