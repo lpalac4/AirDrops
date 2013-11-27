@@ -87,8 +87,6 @@ public:
 	Reload* reloadBullet;
 	Reload* getReload(void);
 
-
-//private:
 	float roll;
 	float pitch;
 	bool stalling;

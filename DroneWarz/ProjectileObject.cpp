@@ -36,8 +36,7 @@ ProjectileObject::~ProjectileObject(void)
 void ProjectileObject::update(void){
 
 	accelx = (engineStrength * cos((direction * PI) / 180.0));
-	accely = -(engineStrength * sin((direction * PI) / 180.0)); //+ GRAVITY;
- 
+	accely = -(engineStrength * sin((direction * PI) / 180.0));
 	
 	CharacterObject::update();	
 

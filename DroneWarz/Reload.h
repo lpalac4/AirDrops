@@ -1,3 +1,9 @@
+/*
+	The Reload class models the reload mechanism in a plane/ship.  Every weapon will have its own 
+	reload class to track its projectile output.
+	@author Luis Palacios
+*/
+
 #ifndef RELOAD_H
 #define RELOAD_H
 

@@ -1,3 +1,9 @@
+/*
+	The AOEProjectile class represents a weapon that does aoe damage ie.Bomb and derives from the Projectile class
+	necessary functions.
+	@author Luis Palacios.
+*/
+
 #ifndef AOEPROJECTILE_H
 #define AOEPROJECTILE_H
 
@@ -10,14 +16,11 @@ public:
 	AOEProjectile(ALLEGRO_BITMAP&);
 	~AOEProjectile(void);
 	
-	//void setSourceObject(CharacterObject&);
 	void setDirection(float);
 	virtual void update(void);
 	virtual void checkVelocityBarriers(void);
 	void startExplosion();
 
-
-//private:
 	CharacterObject sourceOfProjectile;
 	float engineStrength;
 	bool explode;

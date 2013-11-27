@@ -1,3 +1,9 @@
+/*
+	CharacterObject class derives from the GameObject class its bitmap, but implements the necessary 
+	functions and variables to create a physical object in 2D space.
+	@author Luis Palacios
+*/
+
 #ifndef CHARACTEROBJECT_H
 #define CHARACTEROBJECT_H
 

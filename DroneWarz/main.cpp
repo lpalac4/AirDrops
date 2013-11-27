@@ -1,3 +1,8 @@
+/*
+	Controller and entry into the program.
+	@author Luis Palacios
+*/
+
 #include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>

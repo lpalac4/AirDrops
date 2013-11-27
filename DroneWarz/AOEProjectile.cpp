@@ -9,20 +9,12 @@ AOEProjectile::AOEProjectile(ALLEGRO_BITMAP& bitmap) : ProjectileObject(bitmap)
 	direction = 0;
 	velx = engineStrength;
 	vely = GRAVITY;
-	//TERMINAL_VELY = GRAVITY * 3;
 	explode = false;
 }
 
 AOEProjectile::~AOEProjectile(void)
 {
 }
-
-//void AOEProjectile::setSourceObject(CharacterObject& origin){
-//	sourceOfProjectile = origin;
-//	x = origin.x + (al_get_bitmap_width(origin.bitmapObject)/2);
-//	y = origin.y + (al_get_bitmap_height(origin.bitmapObject)/2);
-//
-//}
 
 void AOEProjectile::setDirection(float dir){
 	direction = dir;

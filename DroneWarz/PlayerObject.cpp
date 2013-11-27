@@ -1,13 +1,3 @@
-/** 	
-	@author Luis Palacios 2013
-
-	The plane class is a subclass of an CharacterObject which has the capabilities of adjusting its
-	acceleration and angle of momemtum.  It also is capable of creating new objects including
-	bullets, rockets, cannon shells, and bombs when the ui detects the user pressing the appropriate 
-	keys.
-
-**/
-
 #include "PlayerObject.h"
 
 /** constructor requires a bitmap thats passed by reference, will call the base class Airborne constructor with that same bitmap reference **/
@@ -86,10 +76,6 @@ void PlayerObject::update(void){
 
 	
 	CharacterObject::update();
-	//if(velx < STALLING_VELX){
-		//stalling = true;
-		//stallRoutine();
-	//}
 
 	if(showTrail){
 		std::pair<float, float>* trail = new std::pair<float, float>();

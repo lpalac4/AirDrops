@@ -1,3 +1,8 @@
+/*
+	GameObject was created in an effort to encapsulate all Allegro bitmap variables, which may 
+	turn out to be not necessary in the end, but that's what learning a new library is about.
+	@author Luis Palacios
+*/
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
@@ -14,7 +19,6 @@ public:
 	GameObject(void);
 	~GameObject(void);
 
-//protected:
 	ALLEGRO_BITMAP* bitmapObject;
 
 };

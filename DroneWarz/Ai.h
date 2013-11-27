@@ -1,6 +1,7 @@
 /**
-	AI class 
-
+	AI class represents an enemy plane/ship on screen and will have member function/variables to take 
+	down the player's plane very similar to the player's attacks with more restrictions.
+	@author Luis Palacios
 **/ 
 
 #ifndef AI_H

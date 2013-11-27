@@ -13,13 +13,6 @@ SpecialAttackObject::SpecialAttackObject(ALLEGRO_BITMAP& bitmap) : ProjectileObj
 	TERMINAL_VELY = 100.0;
 	trailList = new std::vector<std::pair<float,float>>();
 }
-//
-//void SpecialAttackObject::setSourceObject(CharacterObject& origin){
-//	sourceOfProjectile = origin;
-//	x = origin.x + (al_get_bitmap_width(origin.bitmapObject)/2);
-//	y = origin.y + (al_get_bitmap_height(origin.bitmapObject)/2);
-//
-//}
 
 void SpecialAttackObject::setDirection(float dir){
 	direction = dir;
@@ -45,15 +38,9 @@ void SpecialAttackObject::addTrailMarker(){
 }
 
 void SpecialAttackObject::update(void){
-	
-	//if(engineStrength > 1.0)
-	//	engineStrength -= 1.0;
-	//else{
-	//	engineStrength = 0;
-	//}
 
 	accelx = (engineStrength * cos((direction * PI) / 180.0));
-	accely = -(engineStrength * sin((direction * PI) / 180.0)); //+ GRAVITY;
+	accely = -(engineStrength * sin((direction * PI) / 180.0)); 
 	if(trailShow){
 		addTrailMarker();
 	}

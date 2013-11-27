@@ -1,3 +1,9 @@
+/*
+	BoundaryBox class is used for collision testing, holds several important member variables to 
+	clearly define a rectangle object in game.
+	@author Luis Palacios
+*/
+
 #ifndef BOUNDARYBOX_H
 #define BOUNDARYBOX_H
 

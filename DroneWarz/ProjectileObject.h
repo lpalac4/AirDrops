@@ -1,3 +1,9 @@
+/*
+	ProjectileObject inherits from CharacterObject all necessary functions and members to create 
+	a 2D object but also maintains data on the origin of the projectile.
+	@author Luis Palacios
+*/
+
 #ifndef PROJECTILEOBJECT_H
 #define PROJECTILEOBJECT_H
 
@@ -14,11 +20,9 @@ public:
 	
 	virtual void update(void);
 	virtual void checkVelocityBarriers();
-	/*bool isEqual(CharacterObject*);*/
 	void setSourceObject(CharacterObject&, bool);
 	void setDirection(float);
 	
-//protected:
 	bool trailShow;
 	bool playerProjectile;
 	float engineStrength;
